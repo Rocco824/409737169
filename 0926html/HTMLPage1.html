@@ -1,0 +1,24 @@
+﻿<html>
+<head>
+<title>月份天數計算</title>
+</head>
+<body>
+<script>
+    function monthDay(val){
+        val = parseInt(val);
+        if (val == 1 || val == 3 || val == 5 || val == 7 || val == 8 || val == 10 || val == 12){
+            alert(val + "月有 31 天");
+        }
+        else if (val == 4 || val == 6 || val == 9 || val == 11){
+            alert(val + "月有 30 天");
+        }
+        else if (val == 2){
+            alert(val + "月有 29 或 28 天");
+        }
+    }
+</script>
+<form>
+    <input id="a" placeholder="輸入月份">
+    <input type="button" onClick="monthDay(this.form.a.value)" value="按我得知該月有幾天">
+</form>
+</body></html>

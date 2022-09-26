@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+<title>二元一次計算</title>
+</head>
+<body>
+<script>
+    function getD(a, b, c){
+        a = parseInt(a);
+        b = parseInt(b);
+        c = parseInt(c);
+        d = parseInt(b*b-4*a*c);
+        alert(d);
+    }
+</script>
+<form>
+    <input id="a" placeholder="x 二次項的係數"><br>
+    <input id="b" placeholder="x 一次項的係數">
+    <input id="c" placeholder="常數項">
+    <input type="button" onClick="getD(this.form.a.value, this.form.b.value, this.form.c.value)" value="按我計算判別式">
+</form>
+</body></html>
