@@ -1,0 +1,28 @@
+﻿<html><head></head><body>
+<script>
+    function calc(){
+        a = parseFloat(document.getElementById('a').value);
+        b = parseFloat(document.getElementById('b').value);
+        c = parseFloat(document.getElementById('c').value);
+        d = b * b - 4 * a * c;
+        if( d > 0){
+			ans_plus = -b + (Math.sqrt(d)) / (2 * a);
+            ans_minus = -b - (Math.sqrt(d)) / (2 * a);
+            alert("解為 " + ans_plus + " 和 " + ans_minus);
+        }
+        else if (d == 0){
+            ans = (-b) / (2 * a);
+            alert("重根，解為 " + ans);
+        }
+        else {
+            alert("沒有實數解");
+        }
+    }
+</script>
+<form>
+    <input id="a" placeholder="x 二次項的係數"><br>
+    <input id="b" placeholder="x 一次項的係數"><br>
+    <input id="c" placeholder="常數項"><br>
+    <input type="button" onClick="calc()" value="按我求解">
+</form>
+</body></html>
