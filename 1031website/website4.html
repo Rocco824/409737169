@@ -1,0 +1,95 @@
+﻿﻿<html>
+<head></head>
+<body bgcolor="#ccccff">
+ 
+<canvas width="500" height="500" id="myCanvas" style="border:1px solid;position:absolute;top:100;left:100;"></canvas>
+<input type="button" id="draw" value="畫圖">
+<input type="button" id="drag" value="拖曳">
+<input type="button" id="nothing" value="取消動作">
+<input type="button" id="width" value="選擇線寬">
+ 
+<script>
+var canvas = document.getElementById("myCanvas"); // 取得物件
+var ctx = canvas.getContext("2d"); // 取得繪圖環境
+var mode = '', drawing = false, oriX, oriY, mx, my, offsetX, offsetY, dist;
+var oldImg, shapes = [], color;
+ 
+document.getElementById('draw').onclick = function(){mode = 'draw'};
+document.getElementById('drag').onclick = function(){mode = 'drag'};
+document.getElementById('nothing').onclick = function(){mode = ''};
+ 
+function drawCircle(x, y, r, color){
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.arc(x, y, r, 0, Math.PI*2, true);
+    ctx.fill();
+}
+ 
+function dist(x1, y1, x2, y2){
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+}
+ 
+function drawShapes(){
+    ctx.clearRect(0, 0, 500, 500);
+    for(i=0; i<shapes.length; i++){
+        drawCircle(shapes[i].x, shapes[i].y, shapes[i].r, shapes[i].color);
+    }
+}
+ 
+canvas.onmousedown = function(ev){
+    mx = event.clientX - parseInt(canvas.style.left) + window.pageXOffset;
+    my = event.clientY - parseInt(canvas.style.top) + window.pageYOffset;
+    if(mode == 'draw'){
+        oldImg = ctx.getImageData(0, 0, 500, 500);
+        color = "#" + Math.floor(Math.random() * 1000000);  
+        oriX = mx;
+        oriY = my;
+        drawing = true;
+    }
+    else if(mode == 'drag'){
+        for(i=shapes.length-1; i>=0; i--){
+            if(dist(mx, my, shapes[i].x, shapes[i].y) < shapes[i].r){
+                var tmp = shapes[i];
+                shapes.splice(i, 1);
+                shapes.push(tmp);
+                offsetX = mx - shapes[shapes.length-1].x;
+                offsetY = my - shapes[shapes.length-1].y;
+                drawing = true;
+                break;
+            }
+        }
+    }
+}
+ 
+canvas.onmousemove = function(ev){
+    mx = event.clientX - parseInt(canvas.style.left) + window.pageXOffset;
+    my = event.clientY - parseInt(canvas.style.top) + window.pageYOffset;
+    if(drawing && mode == 'draw'){
+        ctx.clearRect(0, 0, 500, 500);
+        ctx.putImageData(oldImg, 0, 0);
+        drawCircle(oriX, oriY, dist(oriX,oriY,mx,my), color);
+    }
+    else if(drawing && mode == 'drag'){
+        shapes[shapes.length-1].x = mx - offsetX;
+        shapes[shapes.length-1].y = my - offsetY;
+        drawShapes();
+    }
+}
+ 
+canvas.onmouseup = function(){
+    if(mode == 'draw'){
+        mx = event.clientX - parseInt(canvas.style.left) + window.pageXOffset;
+        my = event.clientY - parseInt(canvas.style.top) + window.pageYOffset;
+        drawCircle(oriX, oriY, dist(oriX,oriY,mx,my), color);
+        shapes.push({
+            x: oriX,
+            y: oriY,
+            r: Math.sqrt(Math.pow(oriX-mx,2) + Math.pow(oriY-my,2)),
+            color: ctx.fillStyle
+        });
+    }
+    drawing = false;
+}
+</script>
+ 
+</body></html>

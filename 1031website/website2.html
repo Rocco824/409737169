@@ -1,0 +1,24 @@
+﻿﻿<!DOCTYPE html>
+<html>
+<head></head>
+<body bgcolor="#ccccff">
+ 
+<canvas id="myCanvas" width="500" height="500" style="border:1px solid"></canvas>
+ 
+<script>
+var canvas = document.getElementById("myCanvas"); // 取得物件
+var ctx = canvas.getContext("2d"); // 取得繪圖環境
+	ctx.lineWidth=10;
+ 
+ctx.strokeStyle = "#f33";
+ 
+ctx.beginPath();
+ctx.arc(200, 200, 100, 0, Math.PI/2, true);
+ctx.stroke();
+ 
+ctx.beginPath();
+ctx.arc(200, 200, 100, 0, Math.PI/2, false);
+ctx.stroke();
+
+</script>
+</body></html>
