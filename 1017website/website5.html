@@ -1,0 +1,20 @@
+﻿<html>
+<head></head>
+<body bgcolor="#ccccff">
+ 
+<script>
+ 
+function myTest(){
+for (var i = 0; i< 10; i++){
+   setTimeout((i) => {
+   console.log(i);
+   }, 1000,i)
+}
+</script>
+ 
+<form>
+    <input id="val" placeholder="請輸入正整數" value="10">
+    <input type="button" onClick="myTest()" value="按我列出一到那個數">
+</form>
+ 
+</body></html>

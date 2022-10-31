@@ -1,0 +1,29 @@
+﻿<html>
+<head>
+<title>1017隨堂4</title>
+</head>
+<body>
+<script>
+ 
+myArr_1 = new Array();
+for( i = 0; i < 10; i++ ){
+    myArr_1[i] = i * 2;
+}
+ 
+myArr_2 = new Array();
+for( i = 0; i < 10 * 2; i++ ){
+    myArr_2[i] = i;
+}
+ 
+myArr_3 = new Array();
+for( i = 0; i < 10; i++ ){
+    myArr_3[i * 2] = i;
+}
+ 
+myArr_4 = myArr_1.concat(myArr_2);
+ 
+myArr_5 = [myArr_1, myArr_2, myArr_3, myArr_4];
+ 
+</script>
+ 
+</body></html>
